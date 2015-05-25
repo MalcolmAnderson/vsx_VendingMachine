@@ -30,8 +30,18 @@ namespace VendingMachine
         {
             // assume that GetCoin is feed a weight in grams from a scale
             Brain o = new Brain();
-            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(5000); 
+            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(5000);
             int expected = 5; // cents
+            Assert.AreEqual(expected, coinValue);
+        }
+
+        [TestMethod]
+        public void ShouldUnderstandADime()
+        {
+            // assume that GetCoin is feed a weight in grams from a scale
+            Brain o = new Brain();
+            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(2268);
+            int expected = 10; // cents
             Assert.AreEqual(expected, coinValue);
         }
     }
