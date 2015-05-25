@@ -45,9 +45,10 @@ namespace VendingMachine
         }
 
 
-        public int AddValue(int ValueType)
+        public int AddValue(int coinValue)
         {
-            return 0;
+            totalValue += coinValue;
+            return totalValue;
         }
  
 

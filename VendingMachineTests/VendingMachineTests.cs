@@ -108,7 +108,16 @@ namespace VendingMachine
         public void ConfirmZeroValueToStart()
         {
             Assert.AreEqual(0, o.TotalValue);
+        }
 
+        [TestMethod]
+        public void AddOneOfEachCoin()
+        {
+            o.AddValue(5);
+            o.AddValue(10);
+            o.AddValue(25);
+            int expected = 40;
+            Assert.AreEqual(expected, o.TotalValue);
         }
     }
 }
