@@ -31,18 +31,24 @@ namespace VendingMachine
         //I want a vending machine that accepts coins
         //So that I can collect money from the customers
         string display = "INSERT COIN";
+        int totalValue = 0;  // in cents
         public string Display
         {
-            get
-            {
-                return display;
-            }
-            set
-            {
-                display = value;
-            }
+            get { return display; }
+            set { display = value; }
         }
 
+        public int TotalValue
+        {
+            get { return totalValue; }
+            set { totalValue = value; }
+        }
+
+
+        public int AddValue(int ValueType)
+        {
+            return 0;
+        }
  
 
     }

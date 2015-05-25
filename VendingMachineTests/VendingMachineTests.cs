@@ -103,5 +103,12 @@ namespace VendingMachine
             string expected = "INSERT COIN";
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void ConfirmZeroValueToStart()
+        {
+            Assert.AreEqual(0, o.TotalValue);
+
+        }
     }
 }
