@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 namespace VendingMachine
 {
     [TestClass]
-    public class BrainTest
+    public class BrainTest_CoinDetection
     {
         // Coin Weight specifications from www.usmint.gov/about_the_mint/?action=coin_specifications
 
@@ -15,10 +15,16 @@ namespace VendingMachine
         //I want a vending machine that accepts coins
         //So that I can collect money from the customers
 
+        Brain o;
+        [TestInitialize]
+        public void Setup()
+        {
+            o = new Brain();
+        }
+
         [TestMethod]
         public void DefaultDisplayShouldBeINSERTCOIN()
         {
-            Brain o = new Brain();
             string actual = o.Display;
             //Initial message = "INSERT COIN"
             string expected = "INSERT COIN";
@@ -29,8 +35,7 @@ namespace VendingMachine
         public void ShouldUnderstandANickel()
         {
             // assume that GetCoin is feed a weight in grams from a scale
-            Brain o = new Brain();
-            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5000, 19.05);
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5000, 21.21);
             int expected = 5; // cents
             Assert.AreEqual(expected, coinValue);
         }
@@ -39,7 +44,6 @@ namespace VendingMachine
         public void ShouldUnderstandADime()
         {
             // assume that GetCoin is feed a weight in grams from a scale
-            Brain o = new Brain();
             int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(2268, 17.91);
             int expected = 10; // cents
             Assert.AreEqual(expected, coinValue);
@@ -49,10 +53,38 @@ namespace VendingMachine
         public void ShouldUnderstandAQuarter()
         {
             // assume that GetCoin is feed a weight in grams from a scale
-            Brain o = new Brain();
             int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5670, 24.26);
             int expected = 25; // cents
             Assert.AreEqual(expected, coinValue);
         }
+
+        [TestMethod]
+        public void Should_Not_UnderstandA_Bad_Nickel()
+        {
+            // assume that GetCoin is feed a weight in grams from a scale
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5000, 17.91); //nickel weight, dime diameter
+            int expected = 0; // cents
+            Assert.AreEqual(expected, coinValue);
+        }
+
+        [TestMethod]
+        public void Should_Not_UnderstandA_Bad_Dime()
+        {
+            // assume that GetCoin is feed a weight in grams from a scale
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(2268, 24.26); // dime weight, quarter diameter
+            int expected = 0; // cents
+            Assert.AreEqual(expected, coinValue);
+        }
+
+        [TestMethod]
+        public void Should_Not_UnderstandA_Bad_Quarter()
+        {
+            // assume that GetCoin is feed a weight in grams from a scale
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5670, 22.21); // quarter weight, nickel diameter
+            int expected = 0; // cents
+            Assert.AreEqual(expected, coinValue);
+        }
+
+
     }
 }
