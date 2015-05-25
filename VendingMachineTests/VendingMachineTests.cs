@@ -44,5 +44,15 @@ namespace VendingMachine
             int expected = 10; // cents
             Assert.AreEqual(expected, coinValue);
         }
+
+        [TestMethod]
+        public void ShouldUnderstandAQuarter()
+        {
+            // assume that GetCoin is feed a weight in grams from a scale
+            Brain o = new Brain();
+            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(5670);
+            int expected = 25; // cents
+            Assert.AreEqual(expected, coinValue);
+        }
     }
 }

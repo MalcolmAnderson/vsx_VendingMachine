@@ -34,6 +34,8 @@ namespace VendingMachine
                 return 5; // A nickel == 5 cents
             else if (weightOfCoinInGrams == 2268)
                 return 10; // A dime == 10 cents
+            else if (weightOfCoinInGrams == 5670)
+                return 10; // A dime == 10 cents
             else
                 return 0;
         }
