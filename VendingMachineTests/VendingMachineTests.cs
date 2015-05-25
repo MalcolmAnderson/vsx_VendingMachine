@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 namespace VendingMachine
 {
     [TestClass]
-    public class BrainTest_CoinDetection
+    public class CoinEvaluatorTest_CoinDetection
     {
         // Coin Weight specifications from www.usmint.gov/about_the_mint/?action=coin_specifications
 
@@ -15,20 +15,11 @@ namespace VendingMachine
         //I want a vending machine that accepts coins
         //So that I can collect money from the customers
 
-        Brain o;
+        CoinEvaluator o;
         [TestInitialize]
         public void Setup()
         {
-            o = new Brain();
-        }
-
-        [TestMethod]
-        public void DefaultDisplayShouldBeINSERTCOIN()
-        {
-            string actual = o.Display;
-            //Initial message = "INSERT COIN"
-            string expected = "INSERT COIN";
-            Assert.AreEqual(expected, actual);
+            o = new CoinEvaluator();
         }
 
         [TestMethod]
@@ -86,5 +77,31 @@ namespace VendingMachine
         }
 
 
+    }
+
+    [TestClass]
+    public class BrainTest_AcceptCoinsAndUpdateDisplay
+    {
+        // Coin Weight specifications from www.usmint.gov/about_the_mint/?action=coin_specifications
+
+        //As a vendor
+        //I want a vending machine that accepts coins
+        //So that I can collect money from the customers
+
+        Brain o;
+        [TestInitialize]
+        public void Setup()
+        {
+            o = new Brain();
+        }
+
+        [TestMethod]
+        public void DefaultDisplayShouldBeINSERTCOIN()
+        {
+            string actual = o.Display;
+            //Initial message = "INSERT COIN"
+            string expected = "INSERT COIN";
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
