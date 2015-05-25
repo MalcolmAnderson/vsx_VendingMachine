@@ -10,5 +10,18 @@ namespace VendingMachine
         //As a vendor
         //I want a vending machine that accepts coins
         //So that I can collect money from the customers
+        string display = "INSERT COIN";
+        public string Display
+        {
+            get
+            {
+                return display;
+            }
+            set
+            {
+                display = value;
+            }
+        }
+
     }
 }
