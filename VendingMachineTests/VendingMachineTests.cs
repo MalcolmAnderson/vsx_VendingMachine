@@ -76,6 +76,20 @@ namespace VendingMachine
             Assert.AreEqual(expected, coinValue);
         }
 
+        [TestMethod]
+        public void BadQuarterShouldBeReturned()
+        {
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5670, 22.21); // quarter weight, nickel diameter
+            Assert.AreEqual(o.CoinReturnState, "RETURNED");
+        }
+
+        [TestMethod]
+        public void GoodQuarterShouldBeKept()
+        {
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5670, 24.26);
+            Assert.AreEqual(o.CoinReturnState, "DEPOSITED");
+        }
+
 
     }
 
