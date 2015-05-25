@@ -28,14 +28,14 @@ namespace VendingMachine
         // TODO - use Diameter as part of evaluation
         // TODO - use Thickness as a part of evaluation
         // TODO - use Edge topography as part of evaluation
-        public int EvaluateCoinValueByWeightOfCoinInMilligrams(int weightOfCoinInGrams)
+        public int EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(int weightOfCoinInGrams, double diameterOfCoinInMillemeters)
         {
             if (weightOfCoinInGrams == 5000)
                 return 5; // A nickel == 5 cents
             else if (weightOfCoinInGrams == 2268)
                 return 10; // A dime == 10 cents
             else if (weightOfCoinInGrams == 5670)
-                return 10; // A dime == 10 cents
+                return 25; // A dime == 10 cents
             else
                 return 0;
         }

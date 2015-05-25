@@ -30,7 +30,7 @@ namespace VendingMachine
         {
             // assume that GetCoin is feed a weight in grams from a scale
             Brain o = new Brain();
-            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(5000);
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5000, 19.05);
             int expected = 5; // cents
             Assert.AreEqual(expected, coinValue);
         }
@@ -40,7 +40,7 @@ namespace VendingMachine
         {
             // assume that GetCoin is feed a weight in grams from a scale
             Brain o = new Brain();
-            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(2268);
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(2268, 17.91);
             int expected = 10; // cents
             Assert.AreEqual(expected, coinValue);
         }
@@ -50,7 +50,7 @@ namespace VendingMachine
         {
             // assume that GetCoin is feed a weight in grams from a scale
             Brain o = new Brain();
-            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(5670);
+            int coinValue = o.EvaluateCoinValueByWeightInMilligramsAndDiameterInMillimeters(5670, 24.26);
             int expected = 25; // cents
             Assert.AreEqual(expected, coinValue);
         }
