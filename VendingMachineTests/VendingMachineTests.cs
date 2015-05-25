@@ -9,6 +9,8 @@ namespace VendingMachine
     [TestClass]
     public class BrainTest
     {
+        // Coin Weight specifications from www.usmint.gov/about_the_mint/?action=coin_specifications
+
         //As a vendor
         //I want a vending machine that accepts coins
         //So that I can collect money from the customers
@@ -21,7 +23,16 @@ namespace VendingMachine
             //Initial message = "INSERT COIN"
             string expected = "INSERT COIN";
             Assert.AreEqual(expected, actual);
+        }
 
+        [TestMethod]
+        public void ShouldUnderstandANickel()
+        {
+            // assume that GetCoin is feed a weight in grams from a scale
+            Brain o = new Brain();
+            int coinValue = o.EvaluateCoinValueByWeightOfCoinInMilligrams(5000); 
+            int expected = 5; // cents
+            Assert.AreEqual(expected, coinValue);
         }
     }
 }

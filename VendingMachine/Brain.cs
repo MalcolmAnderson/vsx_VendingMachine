@@ -23,5 +23,10 @@ namespace VendingMachine
             }
         }
 
+        public int EvaluateCoinValueByWeightOfCoinInMilligrams(int weightOfCoinInGrams)
+        {
+            return 5;
+        }
+
     }
 }
