@@ -122,5 +122,20 @@ namespace VendingMachine
             int expected = 40;
             Assert.AreEqual(expected, o.TotalValue);
         }
+
+        [TestMethod]
+        public void MoreThanADollarShouldAddADecimalToDisplay()
+        {
+            o.AddValue(10);
+            o.AddValue(25);
+            o.AddValue(25);
+            Assert.AreEqual("60", o.Display);
+            o.AddValue(25);
+            Assert.AreEqual("85", o.Display);
+            o.AddValue(25);
+            Assert.AreEqual("1.10", o.Display);
+            int expected = 110;
+            Assert.AreEqual(expected, o.TotalValue);
+        }
     }
 }

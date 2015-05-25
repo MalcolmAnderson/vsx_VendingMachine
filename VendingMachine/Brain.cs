@@ -30,12 +30,23 @@ namespace VendingMachine
         //As a vendor
         //I want a vending machine that accepts coins
         //So that I can collect money from the customers
-        string display = "INSERT COIN";
         int totalValue = 0;  // in cents
         public string Display
         {
-            get { return display; }
-            set { display = value; }
+            get 
+            {
+                if (totalValue == 0)
+                {
+                    return "INSERT COIN";
+                }
+                else if (totalValue > 99)
+                {
+                    decimal tempValue = (decimal)totalValue / 100;
+                    return tempValue.ToString("N2"); // That was much more work than it should have been
+                }
+                else
+                    return totalValue.ToString();
+            }
         }
 
         public int TotalValue
@@ -48,7 +59,6 @@ namespace VendingMachine
         public int AddValue(int coinValue)
         {
             totalValue += coinValue;
-            display = totalValue.ToString();
             return totalValue;
         }
  
