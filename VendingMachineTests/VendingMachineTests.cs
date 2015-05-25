@@ -114,8 +114,11 @@ namespace VendingMachine
         public void AddOneOfEachCoin()
         {
             o.AddValue(5);
+            Assert.AreEqual("5", o.Display);
             o.AddValue(10);
+            Assert.AreEqual("15", o.Display);
             o.AddValue(25);
+            Assert.AreEqual("40", o.Display);
             int expected = 40;
             Assert.AreEqual(expected, o.TotalValue);
         }

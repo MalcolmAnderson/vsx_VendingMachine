@@ -48,6 +48,7 @@ namespace VendingMachine
         public int AddValue(int coinValue)
         {
             totalValue += coinValue;
+            display = totalValue.ToString();
             return totalValue;
         }
  
