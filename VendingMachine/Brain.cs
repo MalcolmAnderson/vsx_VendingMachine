@@ -38,12 +38,14 @@ namespace VendingMachine
         int totalValue = 0;  // in cents
         bool insufficentMoneyFlag = false;
         bool justPurchased = false;
+
         bool soldOut = false;
         decimal currentPrice = 0;
         public int Refunded = 0;
         public int Drink_Inventory = 0; // TODO add call to inventory checker
         public int Chip_Inventory = 0; // TODO add call to inventory checker
         public int Candy_Inventory = 0; // TODO add call to inventory checker
+        public bool ExactChangeOnly = false;
 
         public void ClearValue()
         {
@@ -64,6 +66,11 @@ namespace VendingMachine
                 {
                     soldOut = false;
                     return "SOLD OUT";
+                }
+                else if (ExactChangeOnly)
+                {
+                    ExactChangeOnly = false;
+                    return "EXACT CHANGE ONLY";
                 }
                 else if (justPurchased)
                 {

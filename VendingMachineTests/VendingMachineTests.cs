@@ -288,4 +288,28 @@ namespace VendingMachine
 
     }
 
+
+
+
+
+    [TestClass]
+    public class BrainTests_ExactChangeRequired
+    {
+        Brain o;
+        [TestInitialize]
+        public void Setup()
+        {
+            o = new Brain();
+            o.ExactChangeOnly = true;
+        }
+
+        // TODO Selections without money should also display sold out
+
+        [TestMethod]
+        public void MessageShouldStartOutWithExactChangeRequired()
+        {
+            Assert.AreEqual("EXACT CHANGE ONLY", o.Display);
+        }
+    }
+
 }
