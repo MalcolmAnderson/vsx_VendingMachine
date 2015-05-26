@@ -36,11 +36,20 @@ namespace VendingMachine
         //I want a vending machine that accepts coins
         //So that I can collect money from the customers
         int totalValue = 0;  // in cents
+        bool insufficentMoneyFlag = false;
+        decimal currentPrice = 0;
+
         public string Display
         {
             get 
             {
-                if (totalValue == 0)
+                if( insufficentMoneyFlag )
+                {
+                    insufficentMoneyFlag = false;
+                    string message = "PRICE " + (currentPrice/100).ToString("C");
+                    return message;
+                }
+                else if (totalValue == 0)
                 {
                     return "INSERT COIN";
                 }
@@ -65,6 +74,16 @@ namespace VendingMachine
         {
             totalValue += coinValue;
             return totalValue;
+        }
+
+        public void SelectProduct(string productName, int priceInCents)
+        {
+            if(priceInCents > totalValue)
+            {
+                insufficentMoneyFlag = true;
+                currentPrice = priceInCents;
+            }
+
         }
  
 
