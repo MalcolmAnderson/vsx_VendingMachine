@@ -109,6 +109,13 @@ namespace VendingMachine
             }
         }
 
+        public void CoinReturn()
+        {
+            Refunded = totalValue;
+            totalValue = 0;
+            //TODO Call coin dispensor with Refund Command
+        }
+
 
  
 

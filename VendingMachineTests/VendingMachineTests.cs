@@ -227,4 +227,30 @@ namespace VendingMachine
         }
     }
 
+
+
+    [TestClass]
+    public class BrainTests_ReturnCoins
+    {
+        // Ready message standardized on "INSERT COIN" rather than "INSERT COINS" - Check with Product Owner
+
+        Brain o;
+        [TestInitialize]
+        public void Setup()
+        {
+            o = new Brain();
+        }
+
+
+        [TestMethod]
+        public void PressCoinReturnWithMoneyEntered()
+        {
+            o.AddValue(65);
+            o.CoinReturn();
+            Assert.AreEqual("INSERT COIN", o.Display);
+            Assert.AreEqual(o.Refunded, 65, "Refunded should have been 65 cents");
+            Assert.AreEqual(0, o.TotalValue, "Total should have been set to zero");
+        }
+    }
+
 }
