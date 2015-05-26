@@ -164,6 +164,7 @@ namespace VendingMachine
         public void Setup()
         {
             o = new Brain();
+            o.Drink_Inventory = 1;
         }
 
         [TestMethod]
@@ -171,8 +172,8 @@ namespace VendingMachine
         {
             // zero cash, select pop
             o.SelectProduct("Drink", 100);
-            Assert.AreEqual("PRICE $1.00", o.Display);
-            Assert.AreEqual("INSERT COIN", o.Display);
+            Assert.AreEqual("PRICE $1.00", o.Display, "Should have displayed price");
+            Assert.AreEqual("INSERT COIN", o.Display, "Should have displayed INSERT COIN");
         }
 
         // Add dispensor and check state on success and failure
@@ -201,6 +202,7 @@ namespace VendingMachine
         public void Setup()
         {
             o = new Brain();
+            o.Chip_Inventory = 1;
         }
 
         [TestMethod]
@@ -232,8 +234,6 @@ namespace VendingMachine
     [TestClass]
     public class BrainTests_ReturnCoins
     {
-        // Ready message standardized on "INSERT COIN" rather than "INSERT COINS" - Check with Product Owner
-
         Brain o;
         [TestInitialize]
         public void Setup()
@@ -251,6 +251,41 @@ namespace VendingMachine
             Assert.AreEqual(o.Refunded, 65, "Refunded should have been 65 cents");
             Assert.AreEqual(0, o.TotalValue, "Total should have been set to zero");
         }
+    }
+
+
+
+    [TestClass]
+    public class BrainTests_SoldOut
+    {
+        Brain o;
+        [TestInitialize]
+        public void Setup()
+        {
+            o = new Brain();
+        }
+
+        // TODO Selections without money should also display sold out
+
+        [TestMethod]
+        public void SelectionWithMoneyShouldDisplaySoldOutAndThenAmount()
+        {
+            o.Chip_Inventory = 0;
+            o.AddValue(110);
+            o.SelectProduct("Chips", 50);
+            Assert.AreEqual("SOLD OUT", o.Display);
+            Assert.AreEqual("1.10", o.Display);
+        }
+
+        [TestMethod]
+        public void SelectionWithOutMoneyShouldDisplaySoldOutAndThenINSERTCOIN()
+        {
+            o.Chip_Inventory = 0;
+            o.SelectProduct("Chips", 50);
+            Assert.AreEqual("SOLD OUT", o.Display);
+            Assert.AreEqual("INSERT COIN", o.Display);
+        }
+
     }
 
 }

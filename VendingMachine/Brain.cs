@@ -38,8 +38,12 @@ namespace VendingMachine
         int totalValue = 0;  // in cents
         bool insufficentMoneyFlag = false;
         bool justPurchased = false;
+        bool soldOut = false;
         decimal currentPrice = 0;
         public int Refunded = 0;
+        public int Drink_Inventory = 0; // TODO add call to inventory checker
+        public int Chip_Inventory = 0; // TODO add call to inventory checker
+        public int Candy_Inventory = 0; // TODO add call to inventory checker
 
         public void ClearValue()
         {
@@ -55,6 +59,11 @@ namespace VendingMachine
                     insufficentMoneyFlag = false;
                     string message = "PRICE " + (currentPrice/100).ToString("C");
                     return message;
+                }
+                else if (soldOut)
+                {
+                    soldOut = false;
+                    return "SOLD OUT";
                 }
                 else if (justPurchased)
                 {
@@ -90,24 +99,46 @@ namespace VendingMachine
 
         public void SelectProduct(string productName, int priceInCents)
         {
-            if(priceInCents > totalValue)
+            if (ProductAvailable(productName))
             {
-                insufficentMoneyFlag = true;
-                currentPrice = priceInCents;
+                if (priceInCents > totalValue)
+                {
+                    insufficentMoneyFlag = true;
+                    currentPrice = priceInCents;
+                }
+                else
+                {
+                    justPurchased = true;
+                    currentPrice = 0;
+                    totalValue -= priceInCents;
+                    if (totalValue > 0)
+                        Refunded = totalValue;
+                    totalValue = 0;
+                    //TODO Figure out what to do if unable to refund money
+                    //TODO Call coin dispensor with Refund Command
+                    //TODO Call Dispence Product on ProductDispensor
+                }
             }
             else
             {
-                justPurchased = true;
-                currentPrice = 0;
-                totalValue -= priceInCents;
-                if (totalValue > 0)
-                    Refunded = totalValue;
-                totalValue = 0;
-                //TODO Figure out what to do if unable to refund money
-                //TODO Call coin dispensor with Refund Command
-                //TODO Call Dispence Product on ProductDispensor
+                soldOut = true;
             }
         }
+
+        public bool ProductAvailable(string productName)
+        {
+            if (productName == "Drink" && Drink_Inventory > 0)
+                return true;
+            else if (productName == "Chips" && Chip_Inventory > 0)
+                return true;
+            else if (productName == "Candy" && Candy_Inventory > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+       
 
         public void CoinReturn()
         {
