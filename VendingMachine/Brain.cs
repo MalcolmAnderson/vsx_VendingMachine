@@ -37,7 +37,13 @@ namespace VendingMachine
         //So that I can collect money from the customers
         int totalValue = 0;  // in cents
         bool insufficentMoneyFlag = false;
+        bool justPurchased = false;
         decimal currentPrice = 0;
+
+        public void ClearValue()
+        {
+            totalValue = 0;
+        }
 
         public string Display
         {
@@ -48,6 +54,11 @@ namespace VendingMachine
                     insufficentMoneyFlag = false;
                     string message = "PRICE " + (currentPrice/100).ToString("C");
                     return message;
+                }
+                else if (justPurchased)
+                {
+                    justPurchased = false;
+                    return "THANK YOU";
                 }
                 else if (totalValue == 0)
                 {
@@ -82,6 +93,12 @@ namespace VendingMachine
             {
                 insufficentMoneyFlag = true;
                 currentPrice = priceInCents;
+            }
+            else
+            {
+                justPurchased = true;
+                currentPrice = 0;
+                //Call Dispence Product on ProductDispensor
             }
 
         }

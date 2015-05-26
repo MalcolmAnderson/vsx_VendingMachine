@@ -174,5 +174,20 @@ namespace VendingMachine
             Assert.AreEqual("PRICE $1.00", o.Display);
             Assert.AreEqual("INSERT COIN", o.Display);
         }
+
+        // Add dispensor and check state on success and failure
+
+        [TestMethod]
+        public void SelectPopShouldWorkAsExpected()
+        {
+            o.AddValue(110);
+            o.SelectProduct("Drink", 100);
+            o.ClearValue();
+            Assert.AreEqual("THANK YOU", o.Display);
+            Assert.AreEqual("INSERT COIN", o.Display);
+            Assert.AreEqual(0, o.TotalValue);
+        }
     }
+
+
 }
