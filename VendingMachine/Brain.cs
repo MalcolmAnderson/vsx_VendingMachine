@@ -39,6 +39,7 @@ namespace VendingMachine
         bool insufficentMoneyFlag = false;
         bool justPurchased = false;
         decimal currentPrice = 0;
+        public int Refunded = 0;
 
         public void ClearValue()
         {
@@ -98,10 +99,17 @@ namespace VendingMachine
             {
                 justPurchased = true;
                 currentPrice = 0;
-                //Call Dispence Product on ProductDispensor
+                totalValue -= priceInCents;
+                if (totalValue > 0)
+                    Refunded = totalValue;
+                totalValue = 0;
+                //TODO Figure out what to do if unable to refund money
+                //TODO Call coin dispensor with Refund Command
+                //TODO Call Dispence Product on ProductDispensor
             }
-
         }
+
+
  
 
     }
